@@ -697,11 +697,19 @@ ${t.resNotice}`;
     }
 
     function fallbackRichTextCopy(html, plain, t) {
-        // Create a dummy element just to enable the 'copy' command
         const tempDiv = document.createElement("div");
-        tempDiv.textContent = "copying...";
+        tempDiv.innerHTML = html;
+        
+        // CRITICAL: Keep the element inside the viewport so the browser fully computes its layout and styles for the clipboard.
         tempDiv.style.position = "fixed";
-        tempDiv.style.left = "-9999px";
+        tempDiv.style.top = "50%";
+        tempDiv.style.left = "50%";
+        tempDiv.style.transform = "translate(-50%, -50%)";
+        tempDiv.style.width = "100%";
+        tempDiv.style.opacity = "0"; // Make it invisible
+        tempDiv.style.pointerEvents = "none";
+        tempDiv.style.zIndex = "-1000";
+        
         document.body.appendChild(tempDiv);
 
         const range = document.createRange();
@@ -710,23 +718,17 @@ ${t.resNotice}`;
         selection.removeAllRanges();
         selection.addRange(range);
 
-        // Intercept the copy event to inject raw HTML directly
-        function clipboardListener(e) {
-            e.clipboardData.setData("text/html", html);
-            e.clipboardData.setData("text/plain", plain);
-            e.preventDefault(); // Prevent browser's default DOM serialization
-        }
-
-        document.addEventListener("copy", clipboardListener);
-
         try {
-            document.execCommand('copy');
-            alert(t.alertSuccess);
+            // Rely on the browser's native copy engine to properly serialize the DOM into Rich Text
+            const successful = document.execCommand('copy');
+            if (successful) {
+                alert(t.alertSuccess);
+            } else {
+                fallbackPlainTextOnly(plain, t);
+            }
         } catch (err) {
-            // Absolute fallback to plain text textarea if everything fails
             fallbackPlainTextOnly(plain, t);
         } finally {
-            document.removeEventListener("copy", clipboardListener);
             selection.removeAllRanges();
             document.body.removeChild(tempDiv);
         }
@@ -736,7 +738,9 @@ ${t.resNotice}`;
         const textArea = document.createElement("textarea");
         textArea.value = plain;
         textArea.style.position = "fixed";
-        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.opacity = "0";
         document.body.appendChild(textArea);
         textArea.select();
         try { 
