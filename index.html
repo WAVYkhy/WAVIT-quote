@@ -363,7 +363,7 @@
             </div>
             <div id="convertedPriceText" style="font-size: 13px; color: #71717a; text-align: right; margin-top: -12px; margin-bottom: 16px; font-weight: 600;"></div>
             <button class="copy-button" id="copyBtn">복사하기</button>
-            <p style="font-size: 11px; color: #71717a; text-align: center; margin: 12px 0 0 0; font-weight: 500;">※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다.</p>
+            <p style="font-size: 11px; color: #71717a; text-align: center; margin: 12px 0 0 0; font-weight: 500;">※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다. 빠른 마감은 미포함된 가격입니다.</p>
         </div>
         </div>
     </form>
@@ -396,7 +396,7 @@ const i18n = {
         q7: "7. 일러스트, 음원, 라인업 등의 자료", q7_copy: "7. 자료 첨부", q7_desc: "준비되지 않은 자료가 있다면 언제 전달 가능한지 적어주시길 바랍니다. 기본적으로 모든 자료를 전달받기 전에는 작업을 시작하지 않습니다.", q7_ph: "자료 링크 및 준비 상태에 대해 상세히 작성해주세요.",
         q8: "8. 마감일", q8_desc: "기본적으로 작업 시작 후 14일(Live2D 추가시 21일)입니다. 빠른 마감의 경우 날짜를 적어주시면 일정을 고려하여 가격을 책정해드립니다.", q8_ph: "예: 2026년 06월 30일 (협의 가능)",
         q9: "9. 기타 신청 내용을 작성해주세요.", q9_copy: "9. 추가 요청", q9_ph: "추가 문의사항이나 전달하고 싶으신 메시지가 있다면 작성해주세요.",
-        resTitle: "예상 견적서", resEmpty: "항목을 선택하면 내역이 표시됩니다.", resTotal: "총 예상 견적", copyBtn: "복사하기", resNotice: "※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다.",
+        resTitle: "예상 견적서", resEmpty: "항목을 선택하면 내역이 표시됩니다.", resTotal: "총 예상 견적", copyBtn: "복사하기", resNotice: "※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다. 빠른 마감은 미포함된 가격입니다.",
         alert1: "1. 사용 용도를 선택해주세요.", alert5: "5. 업로드 채널을 입력해주세요.", alert6: "6. 신청곡 링크를 입력해주세요.", alert7: "7. 자료를 입력해주세요.", alert8: "8. 마감일을 입력해주세요.",
         alertSuccess: "복사가 완료되었습니다. 문의 시 붙여넣기로 사용해주세요.", alertFail: "복사에 실패했습니다. 수동으로 복사해주세요.",
         c_use: "사용 용도", c_live: "Live 2D", c_vidEx: "영상 길이 초과", c_ppl: "추가 인원", c_fast: "빠른 마감", c_nego: "협의 후 결정", c_none: "없음"
@@ -413,7 +413,7 @@ const i18n = {
         q7: "7. Materials (Illustrations, Audio, Lineup, etc.)", q7_copy: "7. Attached Materials", q7_desc: "Specify when missing materials will be provided. Work starts only after all materials are received.", q7_ph: "Describe material links and status in detail.",
         q8: "8. Deadline", q8_desc: "Base is 14 days (21 for Live 2D). For faster deadlines, specify the date; price depends on schedule and difficulty.", q8_ph: "e.g., June 30, 2026 (Negotiable)",
         q9: "9. Any other requests?", q9_copy: "9. Additional Requests", q9_ph: "Add any extra inquiries or messages here.",
-        resTitle: "ESTIMATE", resEmpty: "Select items to see the breakdown.", resTotal: "Total Estimate", copyBtn: "COPY", resNotice: "※ This is an estimated quote and may differ from the final price.",
+        resTitle: "ESTIMATE", resEmpty: "Select items to see the breakdown.", resTotal: "Total Estimate", copyBtn: "COPY", resNotice: "※ This is an estimated quote and may differ from the final price. Fast deadline fees are not included.",
         alert1: "Please select 1. Usage.", alert5: "Please enter 5. Upload Channel.", alert6: "Please enter 6. Song Link.", alert7: "Please enter 7. Materials.", alert8: "Please enter 8. Deadline.",
         alertSuccess: "Copied successfully. Please paste it when inquiring.", alertFail: "Copy failed. Please copy manually.",
         c_use: "Usage", c_live: "Live 2D", c_vidEx: "Video Time Extra", c_ppl: "Extra Person", c_fast: "Fast Deadline", c_nego: "Negotiable", c_none: "None"
@@ -430,7 +430,7 @@ const i18n = {
         q7: "7. イラスト、音源、ラインナップなどの資料", q7_copy: "7. 資料添付", q7_desc: "未準備の資料がある場合は提出予定日をご記入ください。全資料が揃うまで作業は開始しません。", q7_ph: "資料のリンクや準備状況を詳細にご記入ください。",
         q8: "8. 希望納期", q8_desc: "基本は14日（Live 2D追加時は21日）。お急ぎの場合は日付をご記入いただければスケジュールを考慮し価格を決定します。", q8_ph: "例：2026年06월 30일（相談可）",
         q9: "9. その他", q9_copy: "9. その他", q9_ph: "追加の質問やメッセージがあればご記入ください。",
-        resTitle: "見積書", resEmpty: "項目を選択すると内訳が表示されます。", resTotal: "合計見積額", copyBtn: "コピーする", resNotice: "※ この金額は見積もりであり、実際の確定金額とは異なる場合があります。",
+        resTitle: "見積書", resEmpty: "項目を選択すると内訳が表示されます。", resTotal: "合計見積額", copyBtn: "コピーする", resNotice: "※ この金額は見積もりであり、実際の確定金額とは異なる場合があります。お急ぎ納品料金は含まれていません。",
         alert1: "1. 使用用途を選択してください。", alert5: "5. アップロード先を入力してください。", alert6: "6. 楽曲リンクを入力してください。", alert7: "7. 資料を入力してください。", alert8: "8. 希望納期を入力してください。",
         alertSuccess: "コピーが完了しました。お問い合わせの際に貼り付けてご使用ください。", alertFail: "コピーに失敗しました。手動でコピーしてください。",
         c_use: "使用用途", c_live: "Live 2D", c_vidEx: "動画の長さ超過", c_ppl: "追加人数", c_fast: "お急ぎ納品", c_nego: "要相談", c_none: "なし"
@@ -684,14 +684,22 @@ document.getElementById('copyBtn').addEventListener('click', function() {
     const live2DPriceText = `+${live2dValue.toLocaleString()}${t.curr}`;
     const videoPriceText = extraTimeCost > 0 ? `+${extraTimeCost.toLocaleString()}${t.curr}` : `0${t.curr}`;
     
-    let extraDetailsText = "";
+    let plainExtraDetails = "";
+    let htmlExtraDetails = "";
+
     if (extraPeopleCheck && extraPeopleQty > 0) {
-        extraDetailsText += `\n   - ${t.c_ppl}: ${extraPeopleQty} (+${extraPeopleCost.toLocaleString()}${t.curr})`;
+        plainExtraDetails += `\n   - ${t.c_ppl}: ${extraPeopleQty} (+${extraPeopleCost.toLocaleString()}${t.curr})`;
+        htmlExtraDetails += `<div>- ${t.c_ppl}: ${extraPeopleQty} <span style="font-size: 12px;">(+${extraPeopleCost.toLocaleString()}${t.curr})</span></div>`;
     }
     if (document.getElementById('fastDeadlineCheck').checked) {
-        extraDetailsText += `\n   - ${t.c_fast}: ${t.c_nego}`;
+        plainExtraDetails += `\n   - ${t.c_fast}: ${t.c_nego}`;
+        htmlExtraDetails += `<div>- ${t.c_fast}: ${t.c_nego}</div>`;
     }
-    if (extraDetailsText === "") { extraDetailsText = " " + t.c_none; }
+    
+    if (plainExtraDetails === "") { 
+        plainExtraDetails = " " + t.c_none; 
+        htmlExtraDetails = t.c_none;
+    }
 
     const otherText = document.getElementById('otherDetails').value.trim() || t.c_none;
 
@@ -700,7 +708,7 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 ${t.q1}: ${useTypeText} (${useTypePriceText})
 ${t.q2}: ${live2DText} (${live2DPriceText})
 ${t.q3}: ${videoMin}${t.q3_min} ${videoSec}${t.q3_sec} (${videoPriceText})
-${t.q4_copy}:${extraDetailsText.replace(/\n/g, '\n  ')}
+${t.q4_copy}:${plainExtraDetails.replace(/\n/g, '\n  ')}
 ${t.q5}: ${uploadChannel}
 ${t.q6}: ${musicInfo}
 ${t.q7_copy}: ${materialsInfo}
@@ -721,7 +729,7 @@ ${t.resNotice}`;
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; width: 120px; color: #71717a; font-weight: 600;">${t.q1}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${useTypeText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${useTypePriceText})</span></td></tr>
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q2}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${live2DText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${live2DPriceText})</span></td></tr>
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q3}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${videoMin}${t.q3_min} ${videoSec}${t.q3_sec} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${videoPriceText})</span></td></tr>
-                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q4_copy}</td><td style="padding: 12px 0; font-weight: 600; color: #3b82f6; white-space: pre-wrap; margin: 0;">${extraDetailsText.trim()}</td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q4_copy}</td><td style="padding: 12px 0; font-weight: 600; color: #3b82f6; margin: 0;">${htmlExtraDetails}</td></tr>
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q5}</td><td style="padding: 12px 0; color: #3f3f46;">${uploadChannel}</td></tr>
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q6}</td><td style="padding: 12px 0; color: #3f3f46; font-family: monospace;">${musicInfo}</td></tr>
                     <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q7_copy}</td><td style="padding: 12px 0; color: #3f3f46; white-space: pre-wrap;">${materialsInfo}</td></tr>
