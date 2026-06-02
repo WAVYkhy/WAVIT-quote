@@ -453,6 +453,15 @@ function changeLanguage(lang) {
         opts[2].textContent = t.q2_1; opts[3].textContent = t.q2_2; opts[4].textContent = t.q2_3;
     }
 
+    const prices = document.querySelectorAll('.option-price');
+    if(prices.length >= 5) {
+        prices[0].textContent = "90,000" + t.curr;
+        prices[1].textContent = "270,000" + t.curr;
+        prices[2].textContent = "0" + t.curr;
+        prices[3].textContent = "+30,000" + t.curr;
+        prices[4].textContent = "+50,000" + t.curr;
+    }
+
     const timeLbs = document.querySelectorAll('.time-label');
     if(timeLbs.length >= 2) { timeLbs[0].textContent = t.q3_min; timeLbs[1].textContent = t.q3_sec; }
 
@@ -671,24 +680,47 @@ ${t.resNotice}`;
     const blobHTML = new Blob([htmlText], { type: 'text/html' });
     const blobText = new Blob([plainText], { type: 'text/plain' });
     
-    if (typeof ClipboardItem !== "undefined") {
-        navigator.clipboard.write([new ClipboardItem({ 'text/html': blobHTML, 'text/plain': blobText })]).then(() => {
-            alert(t.alertSuccess);
-        }).catch(() => fallbackCopyText(plainText, t));
+    if (typeof ClipboardItem !== "undefined" && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/html': blobHTML, 'text/plain': blobText })])
+            .then(() => alert(t.alertSuccess))
+            .catch(() => fallbackRichTextCopy(htmlText, plainText, t));
     } else {
-        fallbackCopyText(plainText, t);
+        fallbackRichTextCopy(htmlText, plainText, t);
     }
 
-    function fallbackCopyText(text, t) {
-        navigator.clipboard.writeText(text).then(() => alert(t.alertSuccess)).catch(() => {
+    function fallbackRichTextCopy(html, plain, t) {
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        tempDiv.style.position = "absolute";
+        tempDiv.style.left = "-9999px";
+        document.body.appendChild(tempDiv);
+
+        const range = document.createRange();
+        range.selectNodeContents(tempDiv);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        try {
+            document.execCommand('copy');
+            alert(t.alertSuccess);
+        } catch (err) {
+            // Fallback to plain text if rich text fails
             const textArea = document.createElement("textarea");
-            textArea.value = text;
+            textArea.value = plain;
             document.body.appendChild(textArea);
             textArea.select();
-            try { document.execCommand('copy'); alert(t.alertSuccess); } 
-            catch (err) { alert(t.alertFail); }
+            try { 
+                document.execCommand('copy'); 
+                alert(t.alertSuccess); 
+            } catch (e) { 
+                alert(t.alertFail); 
+            }
             document.body.removeChild(textArea);
-        });
+        }
+
+        selection.removeAllRanges();
+        document.body.removeChild(tempDiv);
     }
 });
 </script>
