@@ -689,9 +689,10 @@ ${t.resNotice}`;
     }
 
     function fallbackRichTextCopy(html, plain, t) {
+        // Create a dummy element just to enable the 'copy' command
         const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = html;
-        tempDiv.style.position = "absolute";
+        tempDiv.textContent = "copying...";
+        tempDiv.style.position = "fixed";
         tempDiv.style.left = "-9999px";
         document.body.appendChild(tempDiv);
 
@@ -701,26 +702,42 @@ ${t.resNotice}`;
         selection.removeAllRanges();
         selection.addRange(range);
 
+        // Intercept the copy event to inject raw HTML directly
+        function clipboardListener(e) {
+            e.clipboardData.setData("text/html", html);
+            e.clipboardData.setData("text/plain", plain);
+            e.preventDefault(); // Prevent browser's default DOM serialization
+        }
+
+        document.addEventListener("copy", clipboardListener);
+
         try {
             document.execCommand('copy');
             alert(t.alertSuccess);
         } catch (err) {
-            // Fallback to plain text if rich text fails
-            const textArea = document.createElement("textarea");
-            textArea.value = plain;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try { 
-                document.execCommand('copy'); 
-                alert(t.alertSuccess); 
-            } catch (e) { 
-                alert(t.alertFail); 
-            }
-            document.body.removeChild(textArea);
+            // Absolute fallback to plain text textarea if everything fails
+            fallbackPlainTextOnly(plain, t);
+        } finally {
+            document.removeEventListener("copy", clipboardListener);
+            selection.removeAllRanges();
+            document.body.removeChild(tempDiv);
         }
+    }
 
-        selection.removeAllRanges();
-        document.body.removeChild(tempDiv);
+    function fallbackPlainTextOnly(plain, t) {
+        const textArea = document.createElement("textarea");
+        textArea.value = plain;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        try { 
+            document.execCommand('copy'); 
+            alert(t.alertSuccess); 
+        } catch (e) { 
+            alert(t.alertFail); 
+        }
+        document.body.removeChild(textArea);
     }
 });
 </script>
