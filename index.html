@@ -656,25 +656,33 @@ ${t.resTotal}: ${formattedTotal}${t.curr}${convertedStr}
 ${t.resNotice}`;
 
     const htmlText = `
-    <div style="font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; max-width: 540px; color: #18181b; line-height: 1.8; padding: 32px; background-color: #ffffff; border: 1px solid #e4e4e7; border-top: 4px solid #3b82f6;">
-        <h2 style="margin: 0 0 8px 0; color: #18181b; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px;">WAVY - ${t.resTitle}</h2>
-        <p style="margin: 0 0 24px 0; color: #71717a; font-size: 13px;">${t.headerDesc}</p>
-        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; width: 120px; color: #71717a; font-weight: 600;">${t.q1}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${useTypeText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${useTypePriceText})</span></td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q2}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${live2DText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${live2DPriceText})</span></td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q3}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${videoMin}${t.q3_min} ${videoSec}${t.q3_sec} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${videoPriceText})</span></td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q4}</td><td style="padding: 12px 0; font-weight: 600; color: #3b82f6; white-space: pre-wrap; margin: 0;">${extraDetailsText.trim()}</td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q5}</td><td style="padding: 12px 0; color: #3f3f46;">${uploadChannel}</td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q6}</td><td style="padding: 12px 0; color: #3f3f46; font-family: monospace;">${musicInfo}</td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q7}</td><td style="padding: 12px 0; color: #3f3f46; white-space: pre-wrap;">${materialsInfo}</td></tr>
-            <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q8}</td><td style="padding: 12px 0; font-weight: 700; color: #ef4444;">${deadlineInfo}</td></tr>
-            <tr style="border-bottom: 1px solid #18181b;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q9}</td><td style="padding: 12px 0; color: #3f3f46; white-space: pre-wrap;">${otherText}</td></tr>
-        </table>
-        <div style="margin-top: 24px; padding: 20px; background-color: #eff6ff; text-align: center; border: 1px solid #bfdbfe;">
-            <span style="font-size: 18px; font-weight: 800; color: #1e3a8a;">${t.resTotal}: ${formattedTotal}${t.curr}</span><div style="font-size: 13px; color: #71717a; font-weight: 600; margin-top: 4px;">${convertedStr}</div>
-        </div>
-        <p style="font-size: 11px; color: #71717a; text-align: center; margin: 12px 0 0 0; font-weight: 500;">${t.resNotice}</p>
-    </div>
+    <!-- Outer table to enforce width and border against aggressive CSS stripping by target editors -->
+    <table width="100%" style="max-width: 540px; border-collapse: collapse; font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; color: #18181b; line-height: 1.8; background-color: #ffffff; border: 1px solid #e4e4e7; border-top: 4px solid #3b82f6;">
+        <tr>
+            <td style="padding: 32px;">
+                <h2 style="margin: 0 0 8px 0; color: #18181b; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px;">WAVY - ${t.resTitle}</h2>
+                <p style="margin: 0 0 24px 0; color: #71717a; font-size: 13px;">${t.headerDesc}</p>
+                
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; width: 120px; color: #71717a; font-weight: 600;">${t.q1}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${useTypeText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${useTypePriceText})</span></td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q2}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${live2DText} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${live2DPriceText})</span></td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q3}</td><td style="padding: 12px 0; font-weight: 700; color: #18181b;">${videoMin}${t.q3_min} ${videoSec}${t.q3_sec} <span style="color: #3b82f6; font-size: 12px; font-weight: 600;">(${videoPriceText})</span></td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q4}</td><td style="padding: 12px 0; font-weight: 600; color: #3b82f6; white-space: pre-wrap; margin: 0;">${extraDetailsText.trim()}</td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q5}</td><td style="padding: 12px 0; color: #3f3f46;">${uploadChannel}</td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q6}</td><td style="padding: 12px 0; color: #3f3f46; font-family: monospace;">${musicInfo}</td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q7}</td><td style="padding: 12px 0; color: #3f3f46; white-space: pre-wrap;">${materialsInfo}</td></tr>
+                    <tr style="border-bottom: 1px solid #f4f4f5;"><td style="padding: 12px 0; color: #71717a; font-weight: 600;">${t.q8}</td><td style="padding: 12px 0; font-weight: 700; color: #ef4444;">${deadlineInfo}</td></tr>
+                    <tr style="border-bottom: 1px solid #18181b;"><td style="padding: 12px 0; color: #71717a; font-weight: 600; vertical-align: top;">${t.q9}</td><td style="padding: 12px 0; color: #3f3f46; white-space: pre-wrap;">${otherText}</td></tr>
+                </table>
+                
+                <div style="margin-top: 24px; padding: 20px; background-color: #eff6ff; text-align: center; border: 1px solid #bfdbfe;">
+                    <span style="font-size: 18px; font-weight: 800; color: #1e3a8a;">${t.resTotal}: ${formattedTotal}${t.curr}</span>
+                    <div style="font-size: 13px; color: #71717a; font-weight: 600; margin-top: 4px;">${typeof convertedStr !== 'undefined' ? convertedStr : ''}</div>
+                </div>
+                <p style="font-size: 11px; color: #71717a; text-align: center; margin: 12px 0 0 0; font-weight: 500;">${t.resNotice}</p>
+            </td>
+        </tr>
+    </table>
     `;
 
     const blobHTML = new Blob([htmlText], { type: 'text/html' });
