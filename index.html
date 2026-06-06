@@ -103,20 +103,20 @@
 
         .checkbox-container {
             background: #ffffff; border: 1px solid var(--border-color);
-            padding: 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; transition: var(--transition);
+            padding: 0; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; transition: var(--transition);
             min-height: 84px;
             line-height: 1.4;
             word-break: keep-all;
         }
         .checkbox-container:hover { border-color: #18181b; }
         .checkbox-container.checked { border-color: var(--primary); background: var(--primary-light); }
-        .checkbox-info { display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+        .checkbox-info { display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; flex: 1; align-self: stretch; padding: 16px; }
         .checkbox-info input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; border-radius: 0; }
         .checkbox-text-group { display: flex; flex-direction: column; }
         .checkbox-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
         .checkbox-subtext { font-size: 13px; color: var(--text-muted); font-weight: 500; }
         
-        .quantity-control { display: flex; align-items: center; gap: 8px; opacity: 0.5; pointer-events: none; transition: var(--transition); }
+        .quantity-control { display: flex; align-items: center; gap: 8px; opacity: 0.5; pointer-events: none; transition: var(--transition); padding-right: 16px; }
         .checkbox-container.checked .quantity-control { opacity: 1; pointer-events: auto; }
         .quantity-control span { font-size: 13px; color: var(--text-main); font-weight: 600; }
         .quantity-control input[type="number"] {
