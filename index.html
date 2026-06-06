@@ -66,7 +66,8 @@
         }
 
         .header { padding: 40px 40px 20px 40px; text-align: left; border-bottom: 1px solid var(--border-color); margin-bottom: 32px; position: relative;}
-        .header h1 { font-size: 32px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; letter-spacing: -1px; text-transform: uppercase; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 8px; }
+        .header h1 { font-size: 32px; font-weight: 800; color: var(--text-main); letter-spacing: -1px; text-transform: uppercase; line-height: 1; }
         .header p { color: var(--text-muted); font-size: 14px; }
 
         .form-body { padding: 0 40px 40px 40px; }
@@ -155,9 +156,6 @@
         .copy-button:active { transform: scale(0.98); }
 
         .lang-selector {
-            position: absolute;
-            top: 40px;
-            right: 40px;
             display: flex;
             gap: 4px;
         }
@@ -174,9 +172,8 @@
         }
         .lang-btn:hover { border-color: var(--text-main); color: var(--text-main); }
         .lang-btn.active { background: var(--text-main); color: #ffffff; border-color: var(--text-main); }
-
+ 
         @media (max-width: 900px) {
-            .lang-selector { top: 20px; right: 20px; }
             body { padding: 16px; }
             .header { padding: 30px 20px 20px 20px; }
             .form-body { padding: 0 20px 30px 20px; }
@@ -224,12 +221,14 @@
 
 <div class="container">
     <div class="header">
-        <div class="lang-selector">
-            <button class="lang-btn active" onclick="changeLanguage('ko')" id="lang-ko">KO</button>
-            <button class="lang-btn" onclick="changeLanguage('en')" id="lang-en">EN</button>
-            <button class="lang-btn" onclick="changeLanguage('ja')" id="lang-ja">JA</button>
+        <div class="header-top">
+            <h1>WAVIT_studio</h1>
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="changeLanguage('ko')" id="lang-ko">KO</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" id="lang-en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('ja')" id="lang-ja">JA</button>
+            </div>
         </div>
-        <h1>WAVIT_studio</h1>
         <p id="header-desc">상세 내역을 선택하고 입력하시면 예상 견적을 즉시 확인할 수 있습니다.</p>
     </div>
 
@@ -241,14 +240,14 @@
             <label class="field-title required">1. 사용 용도</label>
             <div class="options-grid">
                 <label class="option-card" id="useTypeRadioCard1">
-                    <input type="radio" name="useType" value="90000" onclick="selectRadioCard('useType', this)">
+                    <input type="radio" name="useType" value="100000" onclick="selectRadioCard('useType', this)">
                     <span class="option-label">방송용</span>
-                    <span class="option-price">90,000원</span>
+                    <span class="option-price">100,000원</span>
                 </label>
                 <label class="option-card" id="useTypeRadioCard2">
-                    <input type="radio" name="useType" value="270000" onclick="selectRadioCard('useType', this)">
+                    <input type="radio" name="useType" value="300000" onclick="selectRadioCard('useType', this)">
                     <span class="option-label">상업용</span>
-                    <span class="option-price">270,000원</span>
+                    <span class="option-price">300,000원</span>
                 </label>
             </div>
         </div>
@@ -374,7 +373,7 @@
             </div>
             <div id="convertedPriceText" style="font-size: 13px; color: #71717a; text-align: right; margin-top: -12px; margin-bottom: 16px; font-weight: 600;"></div>
             <button class="copy-button" id="copyBtn">복사하기</button>
-            <p style="font-size: 11px; color: #71717a; text-align: center; margin: 12px 0 0 0; font-weight: 500;">※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다. 빠른 마감은 미포함된 가격입니다.</p>
+            <p style="font-size: 11px; color: #71717a; text-align: left; margin: 12px 0 0 0; font-weight: 500;">※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다. 빠른 마감은 미포함된 가격입니다.</p>
         </div>
         </div>
     </form>
@@ -478,8 +477,8 @@ function changeLanguage(lang) {
 
     const prices = document.querySelectorAll('.option-price');
     if(prices.length >= 4) {
-        prices[0].textContent = "90,000" + t.curr;
-        prices[1].textContent = "270,000" + t.curr;
+        prices[0].textContent = "100,000" + t.curr;
+        prices[1].textContent = "300,000" + t.curr;
         prices[2].textContent = "+30,000" + t.curr;
         prices[3].textContent = "+50,000" + t.curr;
     }
