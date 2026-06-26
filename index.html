@@ -395,40 +395,41 @@
             padding-left: 0;
         }
 
-        .copy-button {
+        /* 공통 버튼 스타일 */
+        .btn-custom {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             padding: 18px;
-            background: transparent;
-            color: var(--color-text-main);
-            border: 1px solid var(--color-text-main);
             font-family: var(--font-sans);
             font-size: 11px;
             font-weight: 400;
             letter-spacing: 2px;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 16px;
-        }
-
-        .copy-button:hover {
-            background: var(--color-text-main);
-            color: var(--color-snow);
-        }
-
-        #emailBtn {
-            background: var(--color-text-main);
-            color: var(--color-snow);
             border: 1px solid var(--color-text-main);
             margin-top: 8px;
         }
 
-        #emailBtn:hover {
-            background: transparent !important;
-            color: var(--color-text-main) !important;
-            border: 1px solid var(--color-text-main) !important;
+        /* 1. 복사하기 버튼 (Outline 스타일) */
+        .btn-copy {
+            background: transparent;
+            color: var(--color-text-main);
+        }
+        .btn-copy:hover {
+            background: var(--color-text-main);
+            color: var(--color-snow);
+        }
+
+        /* 2. 견적서 전송 버튼 (Solid 스타일) */
+        .btn-email {
+            background: var(--color-text-main);
+            color: var(--color-snow);
+        }
+        .btn-email:hover {
+            background: #4a4a4a; /* 진한 회색으로 변경하여 구별 */
+            border-color: #4a4a4a;
         }
 
         .lang-selector {
@@ -792,17 +793,9 @@
                     <div id="convertedPriceText"
                         style="font-size: 13px; color: #71717a; text-align: right; margin-top: -12px; margin-bottom: 16px; font-weight: 600;">
                     </div>
-                    <button class="copy-button" id="copyBtn">복사하기</button>
+                    <button class="btn-custom btn-copy" id="copyBtn">복사하기</button>
+                    <button class="btn-custom btn-email" id="emailBtn">견적서 바로 전송</button>
 
-                    <!-- 이메일 전송 그룹 -->
-                    <div id="emailActionGroup" style="margin-top: 12px; padding: 16px; border: 1px solid var(--color-border); background-color: #f9fafb; border-radius: 6px;">
-                        <div id="contactGroup" style="width: 100%; margin-bottom: 12px;">
-                            <input type="text" id="contactInfo" placeholder="회신받을 연락처 (이메일 / 디스코드)"
-                                style="width: 100%; padding: 12px 14px; font-size: 13.5px; border: 1px solid #d1d5db; background-color: #ffffff; border-radius: 4px; box-sizing: border-box; transition: var(--transition);">
-                        </div>
-                        <!-- 이메일 버튼은 이 그룹 안에 배치 -->
-                        <button class="copy-button" id="emailBtn" style="background-color: var(--color-text-main); color: var(--color-snow); font-weight: 500;">견적서 바로 전송</button>
-                    </div>
                     <p style="font-size: 11px; color: #71717a; text-align: left; margin: 12px 0 0 0; font-weight: 500;">
                         ※ 해당 금액은 예상 견적이며 실제 확정 견적과 다를 수 있습니다. 빠른 마감은 미포함된 가격입니다.</p>
                 </div>
@@ -1338,15 +1331,17 @@ ${t.resNotice}`;
             }
         });
 
-        // 커스텀 알림창 (alert 대체)
+        // 2. showAlert, showConfirm, showPrompt 함수 정의
         function showAlert(message, focusElementId = null) {
             const overlay = document.getElementById('customModalOverlay');
             const msgEl = document.getElementById('customModalMessage');
             const cancelBtn = document.getElementById('customModalCancel');
             const confirmBtn = document.getElementById('customModalConfirm');
+            const inputEl = document.getElementById('modalContactInput');
 
             msgEl.textContent = message;
-            cancelBtn.style.display = 'none'; // 알림창이므로 취소 버튼 숨김
+            cancelBtn.style.display = 'none';
+            inputEl.style.display = 'none';
             overlay.classList.add('active');
 
             confirmBtn.onclick = function () {
@@ -1355,53 +1350,55 @@ ${t.resNotice}`;
             };
         }
 
-        // 커스텀 확인창 (confirm 대체)
-        function showConfirm(message, onConfirm) {
+        function showPrompt(message, onConfirm) {
             const overlay = document.getElementById('customModalOverlay');
             const msgEl = document.getElementById('customModalMessage');
             const cancelBtn = document.getElementById('customModalCancel');
             const confirmBtn = document.getElementById('customModalConfirm');
+            const inputEl = document.getElementById('modalContactInput');
+            const t = i18n[currentLang];
 
             msgEl.textContent = message;
-            cancelBtn.style.display = 'block'; // 확인창이므로 취소 버튼 표시
+            inputEl.style.display = 'block';
+            inputEl.value = '';
+            inputEl.placeholder = t.contactPlaceholder;
+            inputEl.style.borderColor = '#e2e2e2'; // reset border color on show
+            cancelBtn.style.display = 'block';
+            
             overlay.classList.add('active');
+            inputEl.focus();
 
-            cancelBtn.onclick = function () {
+            cancelBtn.onclick = () => overlay.classList.remove('active');
+            
+            confirmBtn.onclick = function() {
+                const val = inputEl.value.trim();
+                if (!val) {
+                    inputEl.style.borderColor = 'red';
+                    return;
+                }
                 overlay.classList.remove('active');
-            };
-
-            confirmBtn.onclick = function () {
-                overlay.classList.remove('active');
-                onConfirm(); // 사용자가 '확인'을 눌렀을 때만 콜백 함수 실행
+                onConfirm(val);
             };
         }
 
         document.getElementById('emailBtn').addEventListener('click', function () {
             const t = i18n[currentLang];
-
-            // 1. 유효성 검사 (showAlert 사용)
+            
+            // 1. 유효성 검사 (기존 연락처 검사 부분 삭제)
             const useTypeActive = document.querySelector('input[name="useType"]:checked');
             if (!useTypeActive) { showAlert(t.alert1); return; }
-
             const uploadChannel = document.getElementById('uploadChannel').value.trim();
             if (!uploadChannel) { showAlert(t.alert5, 'uploadChannel'); return; }
-
             const musicInfo = document.getElementById('musicInfo').value.trim();
             if (!musicInfo) { showAlert(t.alert6, 'musicInfo'); return; }
-
             const materialsInfo = document.getElementById('materialsInfo').value.trim();
             if (!materialsInfo) { showAlert(t.alert7, 'materialsInfo'); return; }
-
             const deadlineInfo = document.getElementById('deadlineInfo').value.trim();
             if (!deadlineInfo) { showAlert(t.alert8, 'deadlineInfo'); return; }
 
-            const contactInfo = document.getElementById('contactInfo').value.trim();
-            if (!contactInfo) { showAlert(t.alertContact, 'contactInfo'); return; }
-
-            // 2. 커스텀 confirm 창 호출
-            showConfirm(t.confirmSend, () => {
-
-                // --- 아래부터는 사용자가 '확인'을 눌렀을 때만 실행됩니다 ---
+            // 2. prompt 모달 띄우기
+            showPrompt(t.confirmSend, (contactInfo) => {
+                // 입력된 contactInfo로 전송 진행
                 const btn = document.getElementById('emailBtn');
                 const originalText = btn.textContent;
                 btn.textContent = t.sending;
@@ -1435,9 +1432,12 @@ ${t.resNotice}`;
                 const formattedTotal = total.toLocaleString();
 
                 let plainExtraDetails = "";
-                if (extraPeopleCheck && extraPeopleQty > 0) plainExtraDetails += `\n   - ${t.c_ppl}: ${extraPeopleQty} (+${extraPeopleCost.toLocaleString()}${t.curr})`;
-                if (thumbCheck) plainExtraDetails += `\n   - ${t.c_thumb} (+5,000${t.curr})`;
-                if (document.getElementById('fastDeadlineCheck').checked) plainExtraDetails += `\n   - ${t.c_fast}: ${t.c_nego}`;
+                if (extraPeopleCheck && extraPeopleQty > 0) plainExtraDetails += `
+   - ${t.c_ppl}: ${extraPeopleQty} (+${extraPeopleCost.toLocaleString()}${t.curr})`;
+                if (thumbCheck) plainExtraDetails += `
+   - ${t.c_thumb} (+5,000${t.curr})`;
+                if (document.getElementById('fastDeadlineCheck').checked) plainExtraDetails += `
+   - ${t.c_fast}: ${t.c_nego}`;
                 if (plainExtraDetails === "") plainExtraDetails = " " + t.c_none;
 
                 const otherText = document.getElementById('otherDetails').value.trim() || t.c_none;
@@ -1445,7 +1445,7 @@ ${t.resNotice}`;
                 // 4. 전송할 텍스트 본문 구성
                 const messageBody = `${t.mailHeader}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${t.contactLabel}: ${contactInfo}
+${t.contactLabel} ${contactInfo}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${t.q1}: ${useTypeText} (${useTypeValue.toLocaleString()}${t.curr})
 ${t.q2}: ${live2DText} (+${live2dValue.toLocaleString()}${t.curr})
@@ -1492,17 +1492,15 @@ ${t.resTotal}: ${formattedTotal}${t.curr}`;
                     });
             });
         });
-
-        // Initialize page language text
-        changeLanguage(currentLang);
     </script>
 
-    <div id="customModalOverlay" class="custom-modal-overlay">
+<div class="custom-modal-overlay" id="customModalOverlay">
         <div class="custom-modal">
-            <div id="customModalMessage" class="custom-modal-message"></div>
+            <div class="custom-modal-message" id="customModalMessage"></div>
+            <input type="text" id="modalContactInput" style="display:none; width: 100%; margin-bottom: 20px; padding: 12px; border: 1px solid #e2e2e2; font-family: inherit;" />
             <div class="custom-modal-buttons">
-                <button id="customModalCancel" class="custom-modal-btn cancel-btn" style="display: none;">취소</button>
-                <button id="customModalConfirm" class="custom-modal-btn confirm-btn">확인</button>
+                <button class="custom-modal-btn cancel-btn" id="customModalCancel">취소</button>
+                <button class="custom-modal-btn" id="customModalConfirm">확인</button>
             </div>
         </div>
     </div>
@@ -1514,17 +1512,8 @@ ${t.resTotal}: ${formattedTotal}${t.curr}`;
                 const urlParams = new URLSearchParams(queryString);
                 if (urlParams.get('embedded') === 'true') {
                     const emailBtn = document.getElementById('emailBtn');
-                    const contactGroup = document.getElementById('contactGroup'); // 연락처 그룹 선택
-                    const emailActionGroup = document.getElementById('emailActionGroup');
-
                     if (emailBtn) {
-                        emailBtn.style.display = 'none'; // 임베드 상태일 때 이메일 버튼 숨김
-                    }
-                    if (contactGroup) {
-                        contactGroup.style.display = 'none'; // 임베드 상태일 때 연락처 입력칸 숨김
-                    }
-                    if (emailActionGroup) {
-                        emailActionGroup.style.display = 'none'; // 임베드 상태일 때 이메일 전송 그룹 전체 숨김
+                        emailBtn.style.display = 'none';
                     }
                 }
             }
