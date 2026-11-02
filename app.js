@@ -117,6 +117,13 @@ const i18n = {
         resTitle: "ESTIMATE", resEmpty: "Select items to see the breakdown.", resTotal: "Total Estimate", resTotalLabel: "Total Estimate", copyBtn: "COPY", emailBtn: "Send Estimate Now", resNotice: "※ This is an estimated quote and may differ from the final price. Fast deadline fees are not included.",
         c_song: "Song Type", c_use: "Usage", c_live: "Live 2D", c_vidEx: "Video Time Extra", c_ppl: "Extra Person", c_fast: "Fast Deadline", c_nego: "Negotiable", c_none: "None",
         alert1: "Please select song type and usage purpose.", alert1_song: "Please select a song type.", alert1_use: "Please select usage purpose.",
+        alert5: "5. Please enter the deadline.",
+        alert6: "6. Please enter the song info.",
+        alert7: "7. Please enter the upload channel.",
+        alert8: "8. Please enter the materials info.",
+        alert9: "9. Please enter the participant lineup.",
+        alertSuccess: "Copied to clipboard. Please paste when inquiring.",
+        alertFail: "Failed to copy. Please copy manually.",
         title: "WAVIT_studio - Custom Order",
         contactPlaceholder: "Contact info for reply (Email / Discord)",
         alertContact: "Please enter your contact information.",
@@ -159,29 +166,20 @@ const i18n = {
         live2dExpandText: "Live 2D リギングオプションを追加する", live2dCollapseText: "Live 2D リギングオプションを閉じる",
         q3: "3. 動画の長さ", q3_desc: "基本の4分を超える場合、30秒ごとに10,000ウォンの追加料金が発生します（例：4分01秒から適用）。", q3_min: "分", q3_sec: "秒",
         q4: "4. 追加料金 (複数選択可)", q4_copy: "4. 追加料金", q4_1: "追加人数", q4_1_sub: "+20,000ウォン / 人", q4_1_desc: "基本2人含む。3人目から1人につき+20,000ウォン", q4_1_qty: "追加人数", unit_person: "人", q4_2: "お急ぎ納品", q4_2_sub: "要相談", q4_3: "簡単サムネイル", q4_3_sub: "+15,000ウォン", c_thumb: "簡単サムネイル",
-        tt_deadline: "希望納期がある場合はご記入ください。スケジュール確認および特急料金の算出を行います。",
-        progressTitle: "必須項目の入力",
-        q1_song: "1. 楽曲タイプ", q1_song_copy: "1. 楽曲タイプ", q1_song_cover: "カバー曲", q1_song_original: "オリジナル曲",
-        q1_use: "使用用途", q1_use_copy: "使用用途", q1_1: "配信・放送用", q1_1_sub: "1.0倍", q1_2: "商用", q1_2_sub: "1.5倍", q1_2_apply: "商用 (1.5倍適用)", q1_notice: "※ オリジナル曲は商用(1.5倍)のみ選択可能です。", toastOriginalNotice: "オリジナル曲選択時、商用(1.5倍)が自動適用されます。",
-        q2: "2. Live 2D 追加", q2_desc: "Live 2Dを追加する場合、基本作業期間(10日)に5日が追加され、納期は15日となります。", q2_note: "※ 実際の価格はLive2Dの可動範囲や密度などのご相談により30,000〜100,000ウォンの範囲で決定されます。（最低基本料金+30,000ウォン適用）", q2_none: "選択しない", q2_none_sub: "追加料金なし", q2_add: "Live 2D 追加", q2_add_sub: "+30,000ウォン 〜 100,000ウォン",
-        q2_card_title: "Live 2D リギングオプションを追加", q2_card_sub: "+30,000ウォンから〜 / 作業期間 +5日",
-        live2dExpandText: "Live 2D リギングオプションを追加する", live2dCollapseText: "Live 2D リギングオプションを閉じる",
-        q3: "3. 動画の長さ", q3_desc: "基本の4分を超える場合、30秒ごとに10,000ウォンの追加料金が発生します（例：4分01秒から適用）。", q3_min: "分", q3_sec: "秒",
-        q4: "4. 追加料金 (複数選択可)", q4_copy: "4. 追加料金", q4_1: "追加人数", q4_1_sub: "+20,000ウォン / 人", q4_1_desc: "基本2人含む。3人目から1人につき+20,000ウォン", q4_1_qty: "追加人数", unit_person: "人", q4_2: "お急ぎ納品", q4_2_sub: "要相談", q4_3: "簡単サムネイル", q4_3_sub: "+15,000ウォン", c_thumb: "簡単サムネイル",
-        q5: "5. 希望納期", q5_copy: "5. 希望納期", q5_desc: "基本は10日（Live 2D追加時は15日）。お急ぎの場合は日付をご記入いただければスケジュールを考慮し価格を決定します。", q5_ph: "例：2026年06월 30일（相談可）",
+        q5: "5. 希望納期", q5_copy: "5. 希望納期", q5_desc: "基本は10日（Live 2D追加時は15日）。お急ぎの場合は日付をご記入いただければスケジュールを考慮し価格を決定します。", q5_ph: "例：2026年06月30日（相談可）",
         q6: "6. 楽曲", q6_copy: "6. 楽曲", q6_ph: "タイトルまたはリンクを入力",
         q7: "7. アップロード先", q7_copy: "7. アップロード先", q7_ph: "チャンネルリンク",
         q8: "8. イラスト・音源などの資料添付", q8_copy: "8. 資料添付", q8_desc: "未準備の資料がある場合は提出予定日をご記入ください。全資料が揃うまで作業は開始しません。", q8_ph: "Googleドライブなど、使いやすい方法で添付してください。",
         q9: "9. 参加者ラインナップ", q9_copy: "9. ラインナップ", q9_ph: "参加したボーカル、イラストレーター等のラインナップをご記入ください。",
         q10: "10. その他", q10_copy: "10. その他", q10_ph: "追加の質問やメッセージがあればご記入ください。",
-        resTitle: "見積書", resEmpty: "項目を選択すると内訳が表示されます。", resTotal: "合計見積額", copyBtn: "コピーする", emailBtn: "見積書を即時送信", resNotice: "※ この金額は見積もりであり、実際の確定金額とは異なる場合があります。お急ぎ納品料金は含まれていません。",
+        resTitle: "見積書", resEmpty: "項目を選択すると内訳が表示されます。", resTotal: "合計見積額", resTotalLabel: "合計見積額", copyBtn: "コピーする", emailBtn: "見積書を即時送信", resNotice: "※ この金額は見積もりであり、実際の確定金額とは異なる場合があります。お急ぎ納品料金は含まれていません。",
         alert1: "1. 楽曲タイプと使用用途を選択してください。", alert1_song: "1. 楽曲タイプを選択してください。", alert1_use: "使用用途を選択してください。", alert5: "5. 希望納期を入力してください。", alert6: "6. 楽曲リンクを入力してください。", alert7: "7. アップロード先を入力してください。", alert8: "8. 資料を入力してください。", alert9: "9. 参加者ラインナップを入力してください。",
         alertSuccess: "コピーが完了しました。お問い合わせの際に貼り付けてご使用ください。", alertFail: "コピーに失敗しました。手動でコピーしてください。",
         c_song: "楽曲タイプ", c_use: "使用用途", c_live: "Live 2D", c_vidEx: "動画の長さ超過", c_ppl: "追加人数", c_fast: "お急ぎ納品", c_nego: "要相談", c_none: "なし",
         title: "WAVIT_studio - Custom Order",
         contactPlaceholder: "返信用連絡先（メール / Discord）",
         alertContact: "連絡先を入力してください。",
-        confirmSend: "入力内容に間違いはありませんか？\n「確認」を押すと見積も리가送信されます。",
+        confirmSend: "入力内容に間違いはありませんか？\n「確認」を押すと見積もりが送信されます。",
         sending: "送信中...",
         sendSuccess: "見積もりをメールで送信しました。\n確認後、折り返しご連絡いたします。",
         sendFailPrefix: "送信に失敗しました：\n",
@@ -193,42 +191,99 @@ const i18n = {
         mailHeader: "[WAVIT オンラインお見積もり依頼]",
         contactLabel: "連絡先：",
         logNotice: "※ サービス品質およびお問い合わせ確認のため、最小限のログが記録される場合があります。",
-        unit_extra: "추가"
+        unit_extra: "追加"
     }
 };
 
-function changeLanguage(lang) {
-    if (lang === currentLang || isLangTransitioning) return;
+/**
+ * Visitor Language Detection (4-tier Priority Logic):
+ * ① URL Parameter: ?lang=ko, ?lang=ja, ?lang=en takes highest precedence
+ * ② Browser Preferred Languages: navigator.languages & navigator.language (ko-family or ja-family)
+ * ③ Timezone Check: Intl.DateTimeFormat().resolvedOptions().timeZone
+ *    - 'Asia/Seoul' or 'ROK' => 'ko'
+ *    - 'Asia/Tokyo' or 'Japan' => 'ja'
+ * ④ Fallback: Default to 'en' for all other global visitors
+ */
+function detectLanguage() {
+    // ① URL 파라미터 확인: ?lang=ko, ?lang=ja, ?lang=en 명시 시 최우선 적용 (테스트 및 iframe 연동용)
+    try {
+        if (typeof window !== 'undefined' && window.location && window.location.search) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam) {
+                const cleanLang = langParam.toLowerCase().trim();
+                if (['ko', 'ja', 'en'].includes(cleanLang)) {
+                    return cleanLang;
+                }
+            }
+        }
+    } catch (e) {
+        // Ignore URL parsing errors
+    }
 
-    isLangTransitioning = true;
+    // ② 브라우저 선호 언어 후보군 탐색: navigator.languages 및 navigator.language
+    // 한국어(ko 계열) 또는 일본어(ja 계열)가 포함되어 있으면 해당 언어로 결정
+    try {
+        if (typeof navigator !== 'undefined') {
+            const candidateLangs = [];
+            if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+                candidateLangs.push(...navigator.languages);
+            }
+            if (navigator.language && !candidateLangs.includes(navigator.language)) {
+                candidateLangs.push(navigator.language);
+            }
 
-    // Immediately update language selector active button state
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    const activeLangBtn = document.getElementById('lang-' + lang);
-    if (activeLangBtn) activeLangBtn.classList.add('active');
+            for (const rawLang of candidateLangs) {
+                if (!rawLang || typeof rawLang !== 'string') continue;
+                const l = rawLang.toLowerCase().trim();
+                if (l.startsWith('ko') || l.includes('korean')) {
+                    return 'ko';
+                }
+                if (l.startsWith('ja') || l.includes('japanese')) {
+                    return 'ja';
+                }
+            }
+        }
+    } catch (e) {
+        // Ignore language detection errors
+    }
 
-    // Collect all elements affected by language change
-    const targets = document.querySelectorAll(`
-        [data-i18n],
-        .option-price[data-base-price],
-        #priceBreakdown,
-        #totalEstimateText,
-        #convertedPriceText,
-        #logNoticeText,
-        .lang-target
-    `);
+    // ③ 타임존(Timezone) 기반 판별: 브라우저 UI 언어가 영어(en-US)인 한국/일본 사용자를 위해
+    // Intl.DateTimeFormat().resolvedOptions().timeZone이 'Asia/Seoul'(또는 'ROK')이면 'ko', 'Asia/Tokyo'(또는 'Japan')이면 'ja'로 자동 판별
+    try {
+        if (typeof Intl !== 'undefined' && Intl.DateTimeFormat) {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (tz && typeof tz === 'string') {
+                const cleanTz = tz.trim();
+                if (/^(Asia\/Seoul|ROK)$/i.test(cleanTz) || cleanTz.toLowerCase().includes('seoul')) {
+                    return 'ko';
+                }
+                if (/^(Asia\/Tokyo|Japan)$/i.test(cleanTz) || cleanTz.toLowerCase().includes('tokyo')) {
+                    return 'ja';
+                }
+            }
+        }
+    } catch (e) {
+        // Ignore timezone detection errors
+    }
 
-    // Phase 1: Fade-Out (0ms ~ 180ms)
-    targets.forEach(el => {
-        el.classList.remove('lang-fading-in');
-        el.classList.add('lang-fading-out');
-    });
+    // ④ 그 외 모든 경우: 영어('en')로 Fallback (한국, 일본 제외 전 세계 방문자 기본 en)
+    return 'en';
+}
 
-    setTimeout(() => {
-        // Actual text and language state update
-        currentLang = lang;
-        const t = i18n[lang];
+function applyLanguage(lang, animate = false) {
+    if (!['ko', 'ja', 'en'].includes(lang)) return;
+    if (lang === currentLang && !animate && typeof document !== 'undefined' && document.documentElement && document.documentElement.lang === lang) return;
 
+    const t = i18n[lang];
+    if (!t) return;
+
+    currentLang = lang;
+    if (typeof document !== 'undefined' && document.documentElement) {
+        document.documentElement.lang = lang;
+    }
+
+    const updateDOM = () => {
         // Data-driven i18n text update
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -251,28 +306,61 @@ function changeLanguage(lang) {
             el.textContent = `${prefix}${basePrice.toLocaleString()}${t.curr}`;
         });
 
-        document.title = t.title;
+        if (t.title) document.title = t.title;
         const contactInfoInput = document.getElementById('contactInfo');
-        if (contactInfoInput) contactInfoInput.placeholder = t.contactPlaceholder;
+        if (contactInfoInput && t.contactPlaceholder) contactInfoInput.placeholder = t.contactPlaceholder;
         
         const modalCancelBtn = document.getElementById('customModalCancel');
-        if (modalCancelBtn) modalCancelBtn.textContent = t.modalCancel;
+        if (modalCancelBtn && t.modalCancel) modalCancelBtn.textContent = t.modalCancel;
         
         const modalConfirmBtn = document.getElementById('customModalConfirm');
-        if (modalConfirmBtn) modalConfirmBtn.textContent = t.modalConfirm;
+        if (modalConfirmBtn && t.modalConfirm) modalConfirmBtn.textContent = t.modalConfirm;
         
         const logNoticeEl = document.getElementById('logNoticeText');
         if (logNoticeEl && t.logNotice) logNoticeEl.textContent = t.logNotice;
 
+        if (typeof calculateTotal === 'function') {
+            calculateTotal();
+        }
+        if (typeof goToStep === 'function') {
+            goToStep(currentStep, true);
+        }
+    };
+
+    if (!animate) {
+        updateDOM();
+        return;
+    }
+
+    if (isLangTransitioning) return;
+    isLangTransitioning = true;
+
+    // Collect all elements affected by language change
+    const targets = document.querySelectorAll(`
+        [data-i18n],
+        .option-price[data-base-price],
+        #priceBreakdown,
+        #totalEstimateText,
+        #convertedPriceText,
+        #logNoticeText,
+        .lang-target
+    `);
+
+    // Phase 1: Fade-Out (0ms ~ 180ms)
+    targets.forEach(el => {
+        el.classList.remove('lang-fading-in');
+        el.classList.add('lang-fading-out');
+    });
+
+    setTimeout(() => {
+        updateDOM();
+
         if (typeof gtag === 'function') {
             gtag('event', 'select_content', {
-                content_type: 'language_button',
+                content_type: 'language_change',
                 item_id: lang
             });
         }
-
-        calculateTotal();
-        goToStep(currentStep, true);
 
         // Phase 2: Fade-In (180ms ~ 400ms)
         targets.forEach(el => {
@@ -286,6 +374,10 @@ function changeLanguage(lang) {
         }, 220);
 
     }, 180);
+}
+
+function changeLanguage(lang, animate = true) {
+    applyLanguage(lang, animate);
 }
 
 function selectRadioCard(groupName, inputEl) {
@@ -1079,6 +1171,19 @@ function showPrompt(message, onConfirm) {
 
 // Event Handler: 복사하기 버튼
 document.addEventListener('DOMContentLoaded', function () {
+    // 0. Ensure past localStorage values do not interfere with auto-detection
+    try {
+        if (typeof localStorage !== 'undefined') {
+            localStorage.removeItem('lang');
+            localStorage.removeItem('language');
+            localStorage.removeItem('user_lang');
+        }
+    } catch (e) {}
+
+    // Auto-detect visitor language and apply immediately without animation
+    const initialLang = detectLanguage();
+    applyLanguage(initialLang, false);
+
     // Initial state check for pre-checked radios
     document.querySelectorAll('.option-card input:checked').forEach(input => {
         const card = input.closest('.option-card');
@@ -1372,3 +1477,10 @@ ${t.resTotal}: ${est.formattedTotal}${t.curr}${est.convertedStr}`;
     // Initial total calculation on load
     calculateTotal();
 });
+
+// Expose global utilities
+if (typeof window !== 'undefined') {
+    window.detectLanguage = detectLanguage;
+    window.applyLanguage = applyLanguage;
+    window.changeLanguage = changeLanguage;
+}

@@ -195,7 +195,6 @@ body {
 }
 
 .btn-custom:focus-visible,
-.lang-btn:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 .option-card input[type="radio"]:focus-visible + .option-label {
@@ -664,57 +663,6 @@ textarea {
 .btn-email:hover {
     opacity: 0.9;
     border-color: var(--accent-surface);
-}
-
-.lang-selector {
-    display: flex;
-    gap: 4px;
-}
-
-.lang-btn {
-    background: var(--nordic-surface);
-    border: 1px solid var(--nordic-border);
-    color: var(--text-muted);
-    padding: 5px 12px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    cursor: pointer;
-    transition: var(--transition);
-    border-radius: var(--pill-radius);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.lang-btn::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background-color: var(--text-muted);
-    transition: var(--transition);
-}
-
-.lang-btn:hover {
-    border-color: var(--nordic-border-strong);
-    color: var(--text-primary);
-    background: var(--nordic-surface-subtle);
-}
-
-.lang-btn:hover::before {
-    background-color: var(--text-primary);
-}
-
-.lang-btn.active {
-    background: var(--accent-surface);
-    color: var(--accent-text);
-    border-color: var(--accent-surface);
-}
-
-.lang-btn.active::before {
-    background-color: var(--accent-text);
 }
 
 .price-breakdown {
@@ -1505,8 +1453,8 @@ textarea {
   will-change: opacity, transform;
 }
 
-span.lang-fading-out:not(.section-tag):not(.lang-btn):not(.btn-step),
-span.lang-fading-in:not(.section-tag):not(.lang-btn):not(.btn-step) {
+span.lang-fading-out:not(.section-tag):not(.btn-step),
+span.lang-fading-in:not(.section-tag):not(.btn-step) {
   display: inline-block;
 }
 
